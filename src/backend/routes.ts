@@ -26,9 +26,13 @@ function getGeneralRoutes(routingInfo: {
 
   console.log(routingInfo.entityName);
   const rt = routingInfo.router;
-  const entity = routingInfo.entity;
   const entityName = routingInfo.entityName;
   const ctrl = routingInfo.ctrl;
 
   rt.get(`/${entityName}`,   ctrl.getAll);
+  rt.get(`/${entityName}`,   ctrl.get);
+  rt.post(`/${entityName}`,   ctrl.insert);
+  rt.put(`/${entityName}`,   ctrl.update);
+  rt.delete(`/${entityName}`,   ctrl.delete);
+
 }
