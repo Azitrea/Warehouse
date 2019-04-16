@@ -41,6 +41,7 @@ abstract class BaseCtrl {
   insert = async (req, res) => {
     try {
       const entity = this.model.create(req.body);
+      console.log(req.body);
       await this.model.save(entity);
       res.json({
         success: true,

@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "gulp": "gulp",
+    "migration:run": "typeorm migration:run"
+
   },
   "private": true,
   "dependencies": {
@@ -20,13 +23,14 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "core-js": "^2.5.4",
-    "rxjs": "~6.3.3",
-    "tslib": "^1.9.0",
-    "zone.js": "~0.8.26",
     "cors": "^2.8.5",
     "express": "latest",
+    "gulp-nodemon": "^2.4.2",
     "mysql": "^2.16.0",
-    "typeorm": "^0.2.12"
+    "rxjs": "~6.3.3",
+    "tslib": "^1.9.0",
+    "typeorm": "^0.2.12",
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
@@ -37,6 +41,9 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^8.9.5",
     "codelyzer": "~4.5.0",
+    "gulp": "^4.0.0",
+    "gulp-cli": "^2.1.0",
+    "gulp-nodemon": "^2.4.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",

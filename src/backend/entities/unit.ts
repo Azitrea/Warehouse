@@ -14,7 +14,7 @@ export class Unit {
   @Column()
   date: string;
 
-  @Column()
-  onStrorage: number;
+  @Column({ nullable: true, default: 0 })
+  onStorage: number;
 
 }
