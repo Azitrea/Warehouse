@@ -12,7 +12,7 @@ export class CustomerOrder {
   customerName: string;
 
   @Column()
-  customerAdress: string;
+  customerAddress: string;
 
   @Column()
   orderDate: string;

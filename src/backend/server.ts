@@ -16,7 +16,6 @@ const corsOptions = {
 app.set('port', (process.env.PORT || 3001));
 
 app.use(cors(corsOptions));
-// app.use('/', express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 

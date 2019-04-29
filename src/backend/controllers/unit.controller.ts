@@ -9,17 +9,12 @@ export default class UnitController extends BaseCtrl {
   model = getRepository(Unit);
 
   insert = async (req, res) => {
-    try {
-      const entity = this.model.create(req.body);
-      console.log(entity);
-      await this.model.save(entity);
-      res.json({
-        success: true,
-        id: entity['id']
-      });
-    } catch (err) {
-      return this.handleError(res);
+    const entity = await this.model.find();
+
+    for (const i of entity) {
+      if (i.name === req.body.name) {
+        res.send('This unit already exists');
+      }
     }
   }
-
 }
