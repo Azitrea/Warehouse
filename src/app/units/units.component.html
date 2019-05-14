@@ -1,0 +1,23 @@
+<div *ngFor="let unit of _service">
+  <table>
+    <tr>
+      <td>{{unit.id}}</td>
+      <td>{{unit.name}}</td>
+      <td>{{unit.date}}</td>
+      <td>{{unit.onStorage}}</td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <div>Add new unit</div>
+  <form [formGroup]="unitFormGroup" (ngSubmit)="onSubmit()">
+    Name:<input type="text" formControlName="name"><br/>
+    Stored Amount: <input type="number" formControlName="onStorage">
+    <button type="submit">Submit</button>
+  </form>
+
+  <div>
+
+  </div>
+</div>
