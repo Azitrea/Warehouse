@@ -16,5 +16,9 @@ export default class UnitController extends BaseCtrl {
         res.send('This unit already exists');
       }
     }
+
+    const newEntity = this.model.create(req.body);
+    await this.model.save(newEntity);
+    res.send({ id: newEntity['id'] });
   }
 }

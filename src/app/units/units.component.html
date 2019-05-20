@@ -1,10 +1,43 @@
-<div *ngFor="let unit of _service">
+<div *ngFor="let unit of _serviceUnits">
   <table>
     <tr>
       <td>{{unit.id}}</td>
       <td>{{unit.name}}</td>
       <td>{{unit.date}}</td>
       <td>{{unit.onStorage}}</td>
+    </tr>
+  </table>
+</div>
+
+<div *ngFor="let part of _serviceParts">
+  <table>
+    <tr>
+      <td>{{part.id}}</td>
+      <td>{{part.partName}}</td>
+      <td>{{part.date}}</td>
+    </tr>
+  </table>
+</div>
+
+<div *ngFor="let number of _servicePartNumbers">
+  <table>
+    <tr>
+      <td>{{number.id}}</td>
+      <td>{{number.partID}}</td>
+      <td>{{number.unitID}}</td>
+      <td>{{number.unitAmount}}</td>
+    </tr>
+  </table>
+</div>
+<div *ngFor="let order of _serviceOrders">
+  <table>
+    <tr>
+      <td>{{order.id}}</td>
+      <td>{{order.customerName}}</td>
+      <td>{{order.customerAddress}}</td>
+      <td>{{order.orderDate}}</td>
+      <td>{{order.orderedPart}}</td>
+      <td>{{order.amount}}</td>
     </tr>
   </table>
 </div>
@@ -16,6 +49,7 @@
     Stored Amount: <input type="number" formControlName="onStorage">
     <button type="submit">Submit</button>
   </form>
+  
 
   <div>
 

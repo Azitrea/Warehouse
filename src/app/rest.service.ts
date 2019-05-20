@@ -8,15 +8,14 @@ import {Observable} from 'rxjs';
 export class RestService {
 
   actionUrl = 'http://localhost:3001/backend/';
-  objectName = 'units';
 
   constructor(private _http: HttpClient) {
   }
 
-  getAll(filter): Promise<any> {
+  getAll(objectName, filter): Promise<any> {
     return new Promise((resolve, reject) => {
       const params = new HttpParams().set('filter', filter);
-      this._http.get(`${this.actionUrl}${this.objectName}/list`, {params: {param: JSON.stringify(filter)}})
+      this._http.get(`${this.actionUrl}${objectName}/list`, {params: {param: JSON.stringify(filter)}})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -29,9 +28,21 @@ export class RestService {
     return await this._http.get(`${this.actionUrl}${objectName}`).toPromise();
   }
 
-  save(obj) {
+  save(objectName, obj) {
     return new Promise((resolve, reject) => {
-      this._http.post(`${this.actionUrl}${this.objectName}`, obj)
+      this._http.post(`${this.actionUrl}${objectName}/add`, obj)
+        .subscribe(res => {
+          resolve(res);
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  update(objectName, obj) {
+    return new Promise((resolve, reject) => {
+      this._http.put(`${this.actionUrl}${objectName}/${obj.id}`, obj)
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -40,31 +51,9 @@ export class RestService {
     });
   }
 
-  file(obj) {
+  delete(objectName, obj) {
     return new Promise((resolve, reject) => {
-      this._http.post(`${this.actionUrl}${this.objectName}/file`, obj)
-        .subscribe(res => {
-          resolve(res);
-        }, (err) => {
-          reject(err);
-        });
-    });
-  }
-
-  update(obj) {
-    return new Promise((resolve, reject) => {
-      this._http.put(`${this.actionUrl}${this.objectName}/${obj.id}`, obj)
-        .subscribe(res => {
-          resolve(res);
-        }, (err) => {
-          reject(err);
-        });
-    });
-  }
-
-  delete(obj) {
-    return new Promise((resolve, reject) => {
-      this._http.delete(`${this.actionUrl}${this.objectName}/${obj.id}`, obj)
+      this._http.delete(`${this.actionUrl}${objectName}/${obj.id}`, obj)
         .subscribe(res => {
           resolve(res);
         }, (err) => {
