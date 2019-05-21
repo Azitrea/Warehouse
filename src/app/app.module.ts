@@ -7,15 +7,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UnitsComponent } from './units/units.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OrdersComponent } from './orders/orders.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path : 'units', component: UnitsComponent },
+  { path: '', redirectTo: '/units', pathMatch: 'full'},
+  { path : 'orders', component: OrdersComponent }
+
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     UnitsComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

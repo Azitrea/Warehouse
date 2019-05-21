@@ -1,3 +1,5 @@
+<div class="h1">Parts and Units</div>
+
 <div *ngFor="let unit of _serviceUnits">
   <table>
     <tr>
@@ -26,18 +28,6 @@
       <td>{{number.partID}}</td>
       <td>{{number.unitID}}</td>
       <td>{{number.unitAmount}}</td>
-    </tr>
-  </table>
-</div>
-<div *ngFor="let order of _serviceOrders">
-  <table>
-    <tr>
-      <td>{{order.id}}</td>
-      <td>{{order.customerName}}</td>
-      <td>{{order.customerAddress}}</td>
-      <td>{{order.orderDate}}</td>
-      <td>{{order.orderedPart}}</td>
-      <td>{{order.amount}}</td>
     </tr>
   </table>
 </div>

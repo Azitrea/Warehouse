@@ -18,7 +18,6 @@ export class UnitsComponent implements OnInit {
   _serviceUnits: string;
   _serviceParts: string;
   _servicePartNumbers: string;
-  _serviceOrders: string;
 
   unitFormGroup = this.fb.group({
     name: [''],
@@ -32,7 +31,6 @@ export class UnitsComponent implements OnInit {
     this.listUnits();
     this.listParts();
     this.listPartsAndNumbers();
-    this.listOrders();
   }
 
   getDate() {
@@ -64,9 +62,7 @@ export class UnitsComponent implements OnInit {
     this._servicePartNumbers = await this.rs.getAll('partNumbers', {});
   }
 
-  async listOrders() {
-    this._serviceOrders = await this.rs.getAll('orders', {});
-  }
+
 
   async saveUnit(){
     await this.rs.save('units', this.unitFormGroup. value);
