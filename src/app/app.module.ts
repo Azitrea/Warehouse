@@ -11,6 +11,9 @@ import { OrdersComponent } from './orders/orders.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UnitsModalComponent } from './units/units-modal/units-modal.component';
 import {EditModalComponent} from './units/units-modal/edit-modal.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {PickListModule} from 'primeng/picklist';
+
 
 const routes: Routes = [
   { path : 'units', component: UnitsComponent },
@@ -32,6 +35,8 @@ const routes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
+    BrowserAnimationsModule,
+    PickListModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule

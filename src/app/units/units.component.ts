@@ -22,6 +22,8 @@ export class UnitsComponent implements OnInit {
   _serviceParts: string;
   _servicePartNumbers: string;
 
+  selectedUnit = [];
+
 
   constructor(public rs: RestService, public fb: FormBuilder,  private modalService: NgbModal) { }
 
@@ -29,6 +31,7 @@ export class UnitsComponent implements OnInit {
     this.listUnits();
     this.listParts();
     this.listPartsAndNumbers();
+    this.selectedUnit = [];
   }
 
 
