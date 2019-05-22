@@ -1,24 +1,27 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-units-modal',
-  templateUrl: './units-modal.component.html',
-  styleUrls: ['./units-modal.component.css']
+  selector: 'app-edit-parts-modal',
+  templateUrl: './edit-parts-modal.component.html',
+  styleUrls: ['./edit-parts-modal.component.css']
 })
-export class UnitsModalComponent implements OnInit {
+export class EditPartsModalComponent implements OnInit {
 
-  unitFormGroup = this.fb.group({
-    name: ['', Validators.required],
-    date: this.getDate(),
-    onStorage: ['', Validators.required],
-    type: 'unit'
-  });
+  @Input() formData = [];
+  @Input() partNumbers = [];
+  partFormGroup: FormGroup;
+  partFormNumbers: FormGroup;
 
   constructor(public activeModal: NgbActiveModal, public fb: FormBuilder) { }
 
   ngOnInit() {
+    this.partFormGroup = this.fb.group(this.formData);
+    this.partFormGroup.patchValue({
+      date: this.getDate()
+    });
+    this.partFormNumbers = this.fb.group(this.partNumbers);
   }
 
   getDate() {
@@ -38,19 +41,11 @@ export class UnitsModalComponent implements OnInit {
     return `${yyyy}.${mm}.${dd}`;
   }
 
-  get name() {
-    return this.unitFormGroup.get('name');
-  }
-
-  get amount() {
-    return this.unitFormGroup.get('amount');
-  }
-
   close() {
     this.activeModal.close({ action: 'close' });
   }
 
   save() {
-    this.activeModal.close({ action: 'save', data: this.unitFormGroup.value });
+    this.activeModal.close({ action: 'save', data: this.partFormGroup.value });
   }
 }

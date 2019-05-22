@@ -1,5 +1,9 @@
-<div class="h1">Parts and Units</div>
+<div class="h1">Units</div>
 
+<div>
+  <button (click)="addUnitModal()">Add new unit</button>
+  <button (click)="logging()">Log</button>
+</div>
 
 <table>
   <tr>
@@ -7,12 +11,14 @@
     <td>Name</td>
     <td>Date</td>
     <td>Amount</td>
+    <td>Type</td>
   </tr>
     <tr *ngFor="let unit of _serviceUnits">
       <td>{{unit.id}}</td>
       <td>{{unit.name}}</td>
       <td>{{unit.date}}</td>
       <td>{{unit.onStorage}}</td>
+      <td>{{unit.type}}</td>
       <td>
         <button (click)="editUnitModal(unit)">Edit</button>
       </td>
@@ -23,15 +29,28 @@
   </table>
 
 
-<div *ngFor="let part of _serviceParts">
+<div class="h1">Parts</div>
+
+<div>
+  <button (click)="addPartModal()">Add new part</button>
+</div>
+
   <table>
-    <tr>
+    <tr *ngFor="let part of _serviceParts">
       <td>{{part.id}}</td>
       <td>{{part.partName}}</td>
       <td>{{part.date}}</td>
+      <td>{{part.type}}</td>
+      <td>{{hasRecipeAdded(part.id)}}</td>
+      <td>
+        <button (click)="editPartsModal(part)">Edit</button>
+      </td>
+      <td>
+        <button (click)="removePart(part)">Delete</button>
+      </td>
     </tr>
   </table>
-</div>
+
 
 <div *ngFor="let number of _servicePartNumbers">
   <table>
@@ -44,15 +63,12 @@
   </table>
 </div>
 
-<button (click)="addUnitModal()">Add new unit</button>
 
-<button (click)="logging()">Log</button>
-
-<p-pickList [source]="_serviceUnits" [target]="selectedUnit" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="brand"
+<!--<p-pickList [source]="_serviceUnits" [target]="selectedUnit" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="brand"
             dragdrop="true" sourceFilterPlaceholder="Search by brand" targetFilterPlaceholder="Search by brand" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
   <ng-template let-unit pTemplate="item">
     <div class="ui-helper-clearfix">
       <div>{{unit.name}}</div>
     </div>
   </ng-template>
-</p-pickList>
+</p-pickList>-->

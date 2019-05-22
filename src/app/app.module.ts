@@ -13,6 +13,8 @@ import { UnitsModalComponent } from './units/units-modal/units-modal.component';
 import {EditModalComponent} from './units/units-modal/edit-modal.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PickListModule} from 'primeng/picklist';
+import { PartsModalComponent } from './units/parts-modal/parts-modal.component';
+import {EditPartsModalComponent} from './units/parts-modal/edit-parts-modal.component';
 
 
 const routes: Routes = [
@@ -28,7 +30,9 @@ const routes: Routes = [
     UnitsComponent,
     OrdersComponent,
     UnitsModalComponent,
-    EditModalComponent
+    EditModalComponent,
+    PartsModalComponent,
+    EditPartsModalComponent
    ],
   imports: [
     BrowserModule,
@@ -41,7 +45,12 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgbModule
   ],
-  entryComponents: [UnitsModalComponent, EditModalComponent],
+  entryComponents: [
+    UnitsModalComponent,
+    EditModalComponent,
+    PartsModalComponent,
+    EditPartsModalComponent
+  ],
   exports: [],
   providers: [],
   bootstrap: [AppComponent]

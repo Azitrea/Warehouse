@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Add new part</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="partFormGroup">
+    Name:<input id="name" type="text" formControlName="partName"><br/>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)=save()>Save</button>
+</div>

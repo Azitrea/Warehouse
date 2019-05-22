@@ -13,4 +13,7 @@ export class Parts {
 
   @Column()
   date: string;
+
+  @Column()
+  type: string;
 }

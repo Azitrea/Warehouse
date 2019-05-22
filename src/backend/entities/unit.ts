@@ -17,4 +17,7 @@ export class Unit {
   @Column({ nullable: true, default: 0 })
   onStorage: number;
 
+  @Column()
+  type: string;
+
 }

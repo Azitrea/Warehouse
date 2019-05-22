@@ -1,0 +1,38 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Edit part and recipe</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="partFormGroup">
+    Name:<input id="name" type="text" formControlName="partName"><br/>
+  </form>
+  <div *ngIf="partNumbers.length !== 0">Recipe</div>
+
+  <div>{{partFormGroup.value | json}}</div>
+  <div>{{partFormNumbers.value | json}}</div>
+
+  <div [formGroup]="partFormNumbers">
+
+  </div>
+
+
+  <!--<table>
+    <tr *ngFor="let part of partNumbers">
+      <td>{{part.unitID}}</td>
+      <td>{{part.partID}}</td>
+      <td>
+        <form [formArrayName]="partFormNumbers">
+          <input type="text" formControlName="part">
+        </form>
+      </td>
+
+    </tr>
+  </table>-->
+
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)=save()>Save</button>
+</div>
