@@ -1,15 +1,27 @@
 <div class="h1">Parts and Units</div>
 
-<div *ngFor="let unit of _serviceUnits">
-  <table>
-    <tr>
+
+<table>
+  <tr>
+    <td>ID</td>
+    <td>Name</td>
+    <td>Date</td>
+    <td>Amount</td>
+  </tr>
+    <tr *ngFor="let unit of _serviceUnits">
       <td>{{unit.id}}</td>
       <td>{{unit.name}}</td>
       <td>{{unit.date}}</td>
       <td>{{unit.onStorage}}</td>
+      <td>
+        <button (click)="editUnitModal(unit)">Edit</button>
+      </td>
+      <td>
+        <button (click)="removeUnit(unit)">Delete</button>
+      </td>
     </tr>
   </table>
-</div>
+
 
 <div *ngFor="let part of _serviceParts">
   <table>
@@ -32,16 +44,7 @@
   </table>
 </div>
 
-<div>
-  <div>Add new unit</div>
-  <form [formGroup]="unitFormGroup" (ngSubmit)="onSubmit()">
-    Name:<input type="text" formControlName="name"><br/>
-    Stored Amount: <input type="number" formControlName="onStorage">
-    <button type="submit">Submit</button>
-  </form>
-  
+<button (click)="addUnitModal()">Add new unit</button>
 
-  <div>
+<button (click)="logging()">Log</button>
 
-  </div>
-</div>

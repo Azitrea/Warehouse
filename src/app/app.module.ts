@@ -9,6 +9,8 @@ import { UnitsComponent } from './units/units.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrdersComponent } from './orders/orders.component';
 import { RouterModule, Routes } from '@angular/router';
+import { UnitsModalComponent } from './units/units-modal/units-modal.component';
+import {EditModalComponent} from './units/units-modal/edit-modal.component';
 
 const routes: Routes = [
   { path : 'units', component: UnitsComponent },
@@ -22,7 +24,9 @@ const routes: Routes = [
     AppComponent,
     UnitsComponent,
     OrdersComponent,
-  ],
+    UnitsModalComponent,
+    EditModalComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,6 +36,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgbModule
   ],
+  entryComponents: [UnitsModalComponent, EditModalComponent],
   exports: [],
   providers: [],
   bootstrap: [AppComponent]

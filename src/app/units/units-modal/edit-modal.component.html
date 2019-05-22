@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Edit Unit</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="unitFormGroup">
+    Name:<input id="name" type="text" formControlName="name"><br/>
+    Stored Amount: <input id="amount" type="number" formControlName="onStorage">
+  </form>
+</div>
+
+<div>{{unitFormGroup.value | json}}</div>
+
+<div class="modal-footer">
+  <button type="button" [disabled]="!unitFormGroup.valid" class="btn btn-outline-dark" (click)="save()">Save</button>
+</div>
+
