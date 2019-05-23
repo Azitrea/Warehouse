@@ -15,6 +15,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PickListModule} from 'primeng/picklist';
 import { PartsModalComponent } from './units/parts-modal/parts-modal.component';
 import {EditPartsModalComponent} from './units/parts-modal/edit-parts-modal.component';
+import {AddUnitToPartModalComponent} from './units/parts-modal/add-unitToPart-modal.component';
 
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ const routes: Routes = [
     UnitsModalComponent,
     EditModalComponent,
     PartsModalComponent,
-    EditPartsModalComponent
+    EditPartsModalComponent,
+    AddUnitToPartModalComponent
    ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ const routes: Routes = [
     UnitsModalComponent,
     EditModalComponent,
     PartsModalComponent,
-    EditPartsModalComponent
+    EditPartsModalComponent,
+    AddUnitToPartModalComponent
   ],
   exports: [],
   providers: [],

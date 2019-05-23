@@ -10,7 +10,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 export class PartsModalComponent implements OnInit {
 
   partFormGroup = this.fb.group({
-    partName: ['', Validators.required],
+    name: ['', Validators.required],
     date: this.getDate(),
     type: 'part'
   });

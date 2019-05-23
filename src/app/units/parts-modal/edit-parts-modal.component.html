@@ -6,32 +6,33 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="partFormGroup">
-    Name:<input id="name" type="text" formControlName="partName"><br/>
+    Name:<input id="name" type="text" formControlName="name"><br/>
   </form>
-  <div *ngIf="partNumbers.length !== 0">Recipe</div>
 
-  <div>{{partFormGroup.value | json}}</div>
-  <div>{{partFormNumbers.value | json}}</div>
+  <div *ngIf="currentRecipe.length !== 0">Recipe</div>
 
   <div [formGroup]="partFormNumbers">
-
+    <div formArrayName="parts">
+      <table>
+        <tr>
+          <td class="w-25">Unit ID</td>
+          <td class="w-25">Name</td>
+          <td class="w-25">Type</td>
+          <td class="w-25">Required Amount</td>
+        </tr>
+        <tr *ngFor="let p of partFormNumbers.controls.parts.controls; let i = index" [formGroupName]="i">
+              <td>{{partFormArray.at(i).value.unitID}}</td>
+              <td>{{partFormArray.at(i).value.name}}</td>
+              <td>{{partFormArray.at(i).value.type}}</td>
+              <td><input class="w-50" type="text" formControlName="unitAmount" /></td>
+              <td><button (click)="removeArrayElement(i)">Remove</button></td>
+        </tr>
+      </table>
+    </div>
   </div>
-
-
-  <!--<table>
-    <tr *ngFor="let part of partNumbers">
-      <td>{{part.unitID}}</td>
-      <td>{{part.partID}}</td>
-      <td>
-        <form [formArrayName]="partFormNumbers">
-          <input type="text" formControlName="part">
-        </form>
-      </td>
-
-    </tr>
-  </table>-->
-
-
+  <div>
+    <button (click)="addPart()">Add New Part</button>
+  </div>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)=save()>Save</button>

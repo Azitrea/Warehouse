@@ -62,6 +62,40 @@ export class RestService {
     });
   }
 
+  saveMany(objectName, obj) {
+    return new Promise((resolve, reject) => {
+      this._http.post(`${this.actionUrl}${objectName}/insertMany`, obj)
+        .subscribe(res => {
+          resolve(res);
+          console.log(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  updateMany(objectName, obj) {
+    return new Promise((resolve, reject) => {
+      this._http.post(`${this.actionUrl}${objectName}/updateMany`, obj)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  deleteMany(objectName, obj) {
+    return new Promise((resolve, reject) => {
+      this._http.post(`${this.actionUrl}${objectName}/deleteMany`, obj)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   getOne(id: number): Observable<any> {
     return this._http.get(`${this.actionUrl}${id}`) as Observable<any>;
   }

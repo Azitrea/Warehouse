@@ -15,5 +15,11 @@ export class PartsNumbers {
   unitID: string;
 
   @Column()
+  name: string;
+
+  @Column()
   unitAmount: string;
+
+  @Column()
+  type: string;
 }

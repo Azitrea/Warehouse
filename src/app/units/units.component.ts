@@ -44,7 +44,6 @@ export class UnitsComponent implements OnInit {
           recipe.push(element);
         }
       }
-
     }
     return recipe.length !== 0;
   }
@@ -114,11 +113,27 @@ export class UnitsComponent implements OnInit {
     const modalRef = this.modalService.open(EditPartsModalComponent);
     modalRef.componentInstance.formData = rowData;
     modalRef.componentInstance.partNumbers = this._servicePartNumbers;
+    modalRef.componentInstance.units = this._serviceUnits;
+    modalRef.componentInstance.parts = this._serviceParts;
 
     modalRef.result.then((result) => {
       switch (result['action']) {
         case 'save':
-          this.updatePart(result['data']);
+          console.log('SaveName');
+          console.log(result['save']);
+          this.updatePart(result['save']);
+
+          console.log('Save');
+          console.log(result['saveData']);
+          this.savePartNumber(result['saveData']);
+
+          console.log('Update');
+          console.log(result['updateData']);
+          this.updatePartNumber(result['updateData']);
+
+          console.log('Remove');
+          console.log(result['removeData']);
+          this.removePartNumbers(result['removeData']);
           break;
         case 'delete':
 
@@ -127,7 +142,31 @@ export class UnitsComponent implements OnInit {
     }, (err) => ('dismissed'));
   }
 
+  async savePartNumber(data) {
+    await this.saveMany('partNumbers', data);
+    await this.listPartsAndNumbers();
+  }
+
+  async updatePartNumber(data) {
+    await this.updateMany('partNumbers', data);
+    await this.listPartsAndNumbers();
+  }
+
+  async removePartNumbers(data) {
+    await this.removeMany('partNumbers', data);
+    await this.listPartsAndNumbers();
+  }
+
   async removePart(data) {
+    if (this.hasRecipeAdded(data['id'])) {
+      const removeArray = [];
+      for (const unit of this._servicePartNumbers) {
+        if (unit['partID'] === data['id'].toString()) {
+          removeArray.push(unit);
+        }
+      }
+      await this.removePartNumbers(removeArray);
+    }
     await this.remove('parts', data);
     this.listParts();
   }
@@ -168,9 +207,16 @@ export class UnitsComponent implements OnInit {
   async remove(objName, data) {
     await this.rs.delete(objName, data);
   }
- logging() {
-    console.log(this._serviceUnits);
- }
 
+  async saveMany(objName, data) {
+    await this.rs.saveMany(objName, data);
+  }
 
+  async updateMany(objName, data) {
+    await this.rs.updateMany(objName, data);
+  }
+
+  async removeMany(objName, data) {
+    await this.rs.deleteMany(objName, data);
+  }
 }

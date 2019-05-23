@@ -52,6 +52,10 @@ abstract class BaseCtrl {
     }
   }
 
+  insertMany = async (req, res) => {
+
+  }
+
   // Get by id
   get = async (req, res) => {
     const post = await this.model.findOne(req.params.id);
@@ -78,6 +82,10 @@ abstract class BaseCtrl {
     }
   }
 
+  updateMany = async (req, res) => {
+
+  }
+
   // Delete by id
   delete = async (req, res) => {
     try {
@@ -90,6 +98,10 @@ abstract class BaseCtrl {
     } catch (err) {
       return this.handleError(res);
     }
+  }
+
+  deleteMany = async (req, res) => {
+
   }
 
   handleError (res) {

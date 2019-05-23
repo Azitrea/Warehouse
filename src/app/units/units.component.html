@@ -2,7 +2,6 @@
 
 <div>
   <button (click)="addUnitModal()">Add new unit</button>
-  <button (click)="logging()">Log</button>
 </div>
 
 <table>
@@ -36,9 +35,16 @@
 </div>
 
   <table>
+    <tr>
+      <td>ID</td>
+      <td>Name</td>
+      <td>Date</td>
+      <td>Type</td>
+      <td>Has recipe?</td>
+    </tr>
     <tr *ngFor="let part of _serviceParts">
       <td>{{part.id}}</td>
-      <td>{{part.partName}}</td>
+      <td>{{part.name}}</td>
       <td>{{part.date}}</td>
       <td>{{part.type}}</td>
       <td>{{hasRecipeAdded(part.id)}}</td>
@@ -50,19 +56,6 @@
       </td>
     </tr>
   </table>
-
-
-<div *ngFor="let number of _servicePartNumbers">
-  <table>
-    <tr>
-      <td>{{number.id}}</td>
-      <td>{{number.partID}}</td>
-      <td>{{number.unitID}}</td>
-      <td>{{number.unitAmount}}</td>
-    </tr>
-  </table>
-</div>
-
 
 <!--<p-pickList [source]="_serviceUnits" [target]="selectedUnit" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="brand"
             dragdrop="true" sourceFilterPlaceholder="Search by brand" targetFilterPlaceholder="Search by brand" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">

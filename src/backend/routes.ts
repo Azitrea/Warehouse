@@ -62,6 +62,9 @@ function getGeneralRoutes(routingInfo: {
   rt.get(`/${entityName}/:id`,   ctrl.get);
   rt.post(`/${entityName}/add`,   ctrl.insert);
   rt.put(`/${entityName}/:id`,   ctrl.update);
-  rt.delete(`/${entityName}/:id`,   ctrl.delete);
+  rt.delete(`/${entityName}/:id`,   ctrl.delete)
+  rt.post(`/${entityName}/insertMany`, ctrl.insertMany);
+  rt.post(`/${entityName}/updateMany`, ctrl.updateMany);
+  rt.post(`/${entityName}/deleteMany`, ctrl.deleteMany);
 
 }

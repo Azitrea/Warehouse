@@ -9,7 +9,7 @@ export class Parts {
   id: number;
 
   @Column()
-  partName: string;
+  name: string;
 
   @Column()
   date: string;
