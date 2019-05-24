@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Add new order</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="orderFormGroup">
+    Name:<input type="text" formControlName="customerName"><br/>
+    Address:<input type="text" formControlName="customerAddress"><br/>
+    Order date:<input type="text" formControlName="orderDate"><br/>
+    Select part to order: <select class="w-50" formControlName="orderedPart">
+      <option hidden value="" disabled selected>Select one</option>
+      <option [value]="part.id" *ngFor="let part of partData">{{part.name}}</option>
+    </select><br/>
+    Ordered amount:<input type="text" formControlName="amount"><br/>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" [disabled]="!orderFormGroup.valid" class="btn btn-outline-dark" (click)="save()">Save</button>
+</div>

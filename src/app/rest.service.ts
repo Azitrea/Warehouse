@@ -29,6 +29,7 @@ export class RestService {
   }
 
   save(objectName, obj) {
+    console.log(obj);
     return new Promise((resolve, reject) => {
       this._http.post(`${this.actionUrl}${objectName}/add`, obj)
         .subscribe(res => {

@@ -1,13 +1,32 @@
-<div class="h1">ORDERS</div>
-<div *ngFor="let order of _serviceOrders">
-  <table>
-    <tr>
-      <td>{{order.id}}</td>
-      <td>{{order.customerName}}</td>
-      <td>{{order.customerAddress}}</td>
-      <td>{{order.orderDate}}</td>
-      <td>{{order.orderedPart}}</td>
-      <td>{{order.amount}}</td>
-    </tr>
-  </table>
+<div class="h1">Orders</div>
+
+<div>
+  <button (click)="addOrder()">Add new order</button>
 </div>
+<table class="table table-striped w-50">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Customer Name</th>
+    <th scope="col">Customer Address</th>
+    <th scope="col">Order Date</th>
+    <th scope="col">Ordered Part</th>
+    <th scope="col">Order Date</th>
+    <th scope="col"> </th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let order of _serviceOrders; index as i">
+    <td>{{order.id}}</td>
+    <td>{{order.customerName}}</td>
+    <td>{{order.customerAddress}}</td>
+    <td>{{order.orderDate}}</td>
+    <td>{{getPartName(order.orderedPart)}}</td>
+    <td>{{order.amount}}</td>
+    <td>
+      <button (click)="removeOrder(order)">Remove</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

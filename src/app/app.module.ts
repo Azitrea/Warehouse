@@ -16,6 +16,7 @@ import {PickListModule} from 'primeng/picklist';
 import { PartsModalComponent } from './units/parts-modal/parts-modal.component';
 import {EditPartsModalComponent} from './units/parts-modal/edit-parts-modal.component';
 import {AddUnitToPartModalComponent} from './units/parts-modal/add-unitToPart-modal.component';
+import { OrderAddModalComponent } from './orders/order-add-modal/order-add-modal.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
     EditModalComponent,
     PartsModalComponent,
     EditPartsModalComponent,
-    AddUnitToPartModalComponent
+    AddUnitToPartModalComponent,
+    OrderAddModalComponent
    ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ const routes: Routes = [
     EditModalComponent,
     PartsModalComponent,
     EditPartsModalComponent,
-    AddUnitToPartModalComponent
+    AddUnitToPartModalComponent,
+    OrderAddModalComponent
   ],
   exports: [],
   providers: [],
