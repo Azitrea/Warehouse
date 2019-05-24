@@ -1,6 +1,4 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
-import { FormField } from './decorator';
-
 
 @Entity()
 export class Unit {

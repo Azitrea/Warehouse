@@ -11,7 +11,7 @@ import {patchComponentDefWithScope} from '@angular/core/src/render3/jit/module';
 })
 export class EditPartsModalComponent implements OnInit {
 
-  @Input() formData = [];
+  @Input() selectedPart = [];
   @Input() partNumbers = [];
   @Input() units = [];
   @Input() parts = [];
@@ -19,8 +19,6 @@ export class EditPartsModalComponent implements OnInit {
   partFormGroup: FormGroup;
   partFormNumbers: FormGroup;
 
-  newRecipeValues = [];
-  updateRecipeValues = [];
   removeRecipeValues = [];
 
   currentRecipe = [];
@@ -28,12 +26,12 @@ export class EditPartsModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, public fb: FormBuilder, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.partFormGroup = this.fb.group(this.formData);
+    this.partFormGroup = this.fb.group(this.selectedPart);
     this.partFormGroup.patchValue({
       date: this.getDate()
     });
 
-    this.recipeSelector(this.formData['id']);
+    this.recipeSelector(this.selectedPart['id']);
     this.partFormNumbers = this.setUpForm(this.currentRecipe);
   }
 
@@ -46,7 +44,7 @@ export class EditPartsModalComponent implements OnInit {
   createPart(part: any) {
     return new FormGroup({
       id: new FormControl(part.id || null),
-      partID: new FormControl(this.formData['id']),
+      partID: new FormControl(this.selectedPart['id']),
       unitID: new FormControl(part.unitID || null),
       name: new FormControl(part.name || ''),
       unitAmount: new FormControl(part.unitAmount || '0'),
@@ -57,7 +55,7 @@ export class EditPartsModalComponent implements OnInit {
   addNewUnit(part: any, unitID) {
     return new FormGroup({
       id: new FormControl( null),
-      partID: new FormControl(this.formData['id']),
+      partID: new FormControl(this.selectedPart['id']),
       unitID: new FormControl(unitID),
       name: new FormControl(part.name || ''),
       unitAmount: new FormControl(part.unitAmount || '0'),
@@ -83,6 +81,8 @@ export class EditPartsModalComponent implements OnInit {
     const modalRef = this.modalService.open(AddUnitToPartModalComponent);
     modalRef.componentInstance.units = this.units;
     modalRef.componentInstance.parts = this.parts;
+    modalRef.componentInstance.listVal = this.partFormArray.value;
+    modalRef.componentInstance.selectedPart = this.selectedPart;
 
     modalRef.result.then((result) => {
       switch (result['action']) {
@@ -90,9 +90,6 @@ export class EditPartsModalComponent implements OnInit {
           const newPart = result['data'];
           this.currentRecipe.push(newPart);
           this.partFormArray.push(this.addNewUnit(newPart, newPart['id']));
-          break;
-        case 'delete':
-
           break;
       }
     }, (err) => ('dismissed'));
@@ -133,15 +130,18 @@ export class EditPartsModalComponent implements OnInit {
   }
 
   save() {
+    const newRecipeValues = [];
+    const updateRecipeValues = [];
+
     const partsArray = this.partFormNumbers.value;
     for (const part of partsArray.parts) {
       if (part.id === null || part.id === undefined) {
-        this.newRecipeValues.push(part);
+        newRecipeValues.push(part);
       } else {
-        this.updateRecipeValues.push(part);
+        updateRecipeValues.push(part);
       }
     }
-    this.activeModal.close({ action: 'save', save: this.partFormGroup.value, saveData: this.newRecipeValues,
-      updateData: this.updateRecipeValues, removeData: this.removeRecipeValues});
+    this.activeModal.close({ action: 'save', save: this.partFormGroup.value, saveData: newRecipeValues,
+      updateData: updateRecipeValues, removeData: this.removeRecipeValues});
   }
 }

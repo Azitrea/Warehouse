@@ -31,10 +31,13 @@ export class OrdersComponent implements OnInit {
   }
 
   getPartName(id) {
-    for (const part of this._serviceParts){
-      if (part['id'].toString() === id) {
-        return part['name'];
+    try {
+      for (const part of this._serviceParts) {
+        if (part['id'].toString() === id) {
+          return part['name'];
+        }
       }
+    } catch (e) {
     }
     return `Name not found for ID: ${id}`;
   }

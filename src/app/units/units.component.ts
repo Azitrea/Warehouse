@@ -14,12 +14,6 @@ import {EditPartsModalComponent} from './parts-modal/edit-parts-modal.component'
 })
 export class UnitsComponent implements OnInit {
 
-  backend = ['units',
-    'parts',
-    'partNumbers',
-    'orders'
-  ];
-
   _serviceUnits: [];
   _serviceParts: [];
   _servicePartNumbers: [];
@@ -37,14 +31,19 @@ export class UnitsComponent implements OnInit {
 
   hasRecipeAdded(PartID) {
     const recipe = [];
-    if (this._servicePartNumbers.length !== 0) {
+    try {
+      if (this._servicePartNumbers.length !== 0) {
 
-      for (const element of this._servicePartNumbers) {
-        if (element['partID'] === PartID.toString()) {
-          recipe.push(element);
+        for (const element of this._servicePartNumbers) {
+          if (element['partID'] === PartID.toString()) {
+            recipe.push(element);
+          }
         }
       }
+    } catch (e) {
+      console.log(e);
     }
+
     return recipe.length !== 0;
   }
 
@@ -69,24 +68,18 @@ export class UnitsComponent implements OnInit {
         case 'save':
           this.saveUnits(result['data']);
           break;
-        case 'delete':
-
-          break;
       }
     }, (err) => ('dismissed'));
   }
 
   editUnitModal(rowData) {
     const modalRef = this.modalService.open(EditModalComponent);
-    modalRef.componentInstance.formData = rowData;
+    modalRef.componentInstance.selectedPart = rowData;
 
     modalRef.result.then((result) => {
       switch (result['action']) {
         case 'save':
           this.updateUnits(result['data']);
-          break;
-        case 'delete':
-
           break;
       }
     }, (err) => ('dismissed'));
@@ -102,16 +95,13 @@ export class UnitsComponent implements OnInit {
           console.log(result['data']);
           this.savePart(result['data']);
           break;
-        case 'delete':
-
-          break;
       }
     }, (err) => ('dismissed'));
   }
 
   editPartsModal(rowData) {
     const modalRef = this.modalService.open(EditPartsModalComponent);
-    modalRef.componentInstance.formData = rowData;
+    modalRef.componentInstance.selectedPart = rowData;
     modalRef.componentInstance.partNumbers = this._servicePartNumbers;
     modalRef.componentInstance.units = this._serviceUnits;
     modalRef.componentInstance.parts = this._serviceParts;
@@ -134,9 +124,6 @@ export class UnitsComponent implements OnInit {
           console.log('Remove');
           console.log(result['removeData']);
           this.removePartNumbers(result['removeData']);
-          break;
-        case 'delete':
-
           break;
       }
     }, (err) => ('dismissed'));
