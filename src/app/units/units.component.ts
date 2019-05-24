@@ -74,7 +74,7 @@ export class UnitsComponent implements OnInit {
 
   editUnitModal(rowData) {
     const modalRef = this.modalService.open(EditModalComponent);
-    modalRef.componentInstance.selectedPart = rowData;
+    modalRef.componentInstance.formData = rowData;
 
     modalRef.result.then((result) => {
       switch (result['action']) {
