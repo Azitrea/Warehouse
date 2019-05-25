@@ -35,5 +35,5 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)=save()>Save</button>
+  <button type="button" class="btn btn-outline-dark" [disabled]="partFormNumbers.value.parts.length === 0" (click)=save()>Save</button>
 </div>

@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {AddUnitToPartModalComponent} from './add-unitToPart-modal.component';
-import {patchComponentDefWithScope} from '@angular/core/src/render3/jit/module';
 
 @Component({
   selector: 'app-edit-parts-modal',
@@ -132,6 +131,8 @@ export class EditPartsModalComponent implements OnInit {
   save() {
     const newRecipeValues = [];
     const updateRecipeValues = [];
+    console.log('val');
+    console.log(this.partFormNumbers.value.parts);
 
     const partsArray = this.partFormNumbers.value;
     for (const part of partsArray.parts) {

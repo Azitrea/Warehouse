@@ -13,8 +13,13 @@
       <option hidden value="" disabled selected>Select one</option>
       <option [value]="part.id" *ngFor="let part of partData">{{part.name}}</option>
     </select><br/>
-    Ordered amount:<input type="text" formControlName="amount"><br/>
+    Ordered amount:<input type="number" formControlName="amount"><br/>
   </form>
+
+  <div *ngIf="_missing.length !== 0" class="alert alert-danger">
+    <span>Not enough items in storage</span>
+  </div>
+
 </div>
 <div class="modal-footer">
   <button type="button" [disabled]="!orderFormGroup.valid" class="btn btn-outline-dark" (click)="save()">Save</button>

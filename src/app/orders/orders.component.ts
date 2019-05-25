@@ -57,6 +57,8 @@ export class OrdersComponent implements OnInit {
   addOrder() {
     const modalRef = this.modalService.open(OrderAddModalComponent);
     modalRef.componentInstance.partData = this._serviceParts;
+    modalRef.componentInstance.partNumbers = this._servicePartNumbers;
+    modalRef.componentInstance.units = this._serviceUnits;
 
     modalRef.result.then((result) => {
       switch (result['action']) {
@@ -65,93 +67,6 @@ export class OrdersComponent implements OnInit {
           break;
       }
     }, (err) => ('dismissed'));
-  }
-
-  calculateOrderUnits(OrderedPartID) {
-    const UnitsNeeded = [];
-    const PartsAlreadyUsed = [];
-
-    const onePart = {'name': this.getPartName(OrderedPartID), 'id': OrderedPartID};
-    PartsAlreadyUsed.push(onePart);
-
-    const result = this.selectPartAndUnitList(OrderedPartID, PartsAlreadyUsed, UnitsNeeded);
-
-    console.log('Result');
-    console.log(result);
-  }
-
-  selectPartAndUnitList(OrderedPartID, PartsAlreadyUsed, UnitsNeeded) {
-    const ID = OrderedPartID;
-
-    let error = false;
-
-    let used = PartsAlreadyUsed;
-    let units = UnitsNeeded;
-
-    const filteredUnitsList = this.filterByID(ID);
-
-    for (const one of filteredUnitsList) {
-
-      if (one['type'] === 'unit') {
-        const oneUnit = {'id': one['unitID'], 'name': one['name'], 'amount': Number(one['unitAmount'])};
-        if (units.length === 0) {
-          units.push(oneUnit);
-        } else {
-          let isAdded = false;
-          let index = null;
-          for (const i in units) {
-            if (units[i]['id'] === oneUnit['id'] && units[i]['name'] === oneUnit['name']) {
-              isAdded = true;
-              index = i;
-            }
-          }
-
-          if (isAdded) {
-            units[index]['amount'] += oneUnit['amount'];
-          } else {
-            units.push(oneUnit);
-          }
-        }
-      }
-
-      if (one['type'] === 'part') {
-        const onePart = {'name': one['name'], 'id': one['unitID']};
-        if (!this.containsObject(onePart, used)) {
-          used.push(onePart);
-          const result = this.selectPartAndUnitList(one['unitID'], used, units);
-          if (result !== 'Error') {
-            used = result['used'];
-            units = result['units'];
-          } else {
-            error = true;
-            return 'Error';
-          }
-        } else {
-          error = true;
-          return 'Error';
-        }
-      }
-    }
-    return {'units': units, 'used': used};
-  }
-
-  containsObject(obj, list) {
-    for (const entity of list) {
-      if (entity['name'] === obj['name'] && entity['id'] === obj['id']) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  filterByID(partID) {
-    const unitList = [];
-    for (const one of this._servicePartNumbers) {
-      if (one['partID'] === partID) {
-        unitList.push(one);
-      }
-    }
-    return unitList;
   }
 
   async saveOrder(data) {
