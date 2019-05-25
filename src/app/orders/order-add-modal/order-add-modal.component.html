@@ -11,7 +11,7 @@
     Order date:<input type="text" formControlName="orderDate"><br/>
     Select part to order: <select class="w-50" formControlName="orderedPart">
       <option hidden value="" disabled selected>Select one</option>
-      <option [value]="part.id" *ngFor="let part of partData">{{part.name}}</option>
+      <option [value]="part.id" *ngFor="let part of _sortedPartData">{{part.name}}</option>
     </select><br/>
     Ordered amount:<input type="number" formControlName="amount"><br/>
   </form>

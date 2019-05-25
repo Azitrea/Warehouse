@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, Validators} from '@angular/forms';
+import {enterView} from '@angular/core/src/render3/state';
 
 @Component({
   selector: 'app-order-add-modal',
@@ -12,6 +13,7 @@ export class OrderAddModalComponent implements OnInit {
   @Input() partData = [];
   @Input() partNumbers = [];
   @Input() units = [];
+  _sortedPartData = [];
 
   orderFormGroup = this.fb.group({
     id: null,
@@ -28,6 +30,7 @@ export class OrderAddModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sortPartsWithNoRecipe();
   }
 
   getDate() {
@@ -45,6 +48,32 @@ export class OrderAddModalComponent implements OnInit {
     }
 
     return `${yyyy}.${mm}.${dd}`;
+  }
+
+  sortPartsWithNoRecipe() {
+    for (const entity of this.partData) {
+      if (this.hasRecipeAdded(entity['id'])) {
+        this._sortedPartData.push(entity);
+      }
+    }
+  }
+
+  hasRecipeAdded(PartID) {
+    const recipe = [];
+    try {
+      if (this.partNumbers.length !== 0) {
+
+        for (const element of this.partNumbers) {
+          if (element['partID'] === PartID.toString()) {
+            recipe.push(element);
+          }
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    return recipe.length !== 0;
   }
 
   getPartName(id) {
