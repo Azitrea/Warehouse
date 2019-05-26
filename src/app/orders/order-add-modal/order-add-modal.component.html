@@ -6,18 +6,56 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="orderFormGroup">
-    Name:<input type="text" formControlName="customerName"><br/>
-    Address:<input type="text" formControlName="customerAddress"><br/>
-    Order date:<input type="text" formControlName="orderDate"><br/>
-    Select part to order: <select class="w-50" formControlName="orderedPart">
-      <option hidden value="" disabled selected>Select one</option>
-      <option [value]="part.id" *ngFor="let part of _sortedPartData">{{part.name}}</option>
-    </select><br/>
-    Ordered amount:<input type="number" formControlName="amount"><br/>
+    <table>
+      <tr>
+        <td>
+          Name:
+        </td>
+        <td>
+          <input type="text" formControlName="customerName">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Address:
+        </td>
+        <td>
+          <input type="text" formControlName="customerAddress">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Order date:
+        </td>
+        <td>
+          <input type="text" formControlName="orderDate">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Select part to order:
+        </td>
+        <td>
+          <select class="w-100 browser-default custom-select" formControlName="orderedPart">
+            <option hidden value="" disabled selected>Select one</option>
+            <option [value]="part.id" *ngFor="let part of _sortedPartData">{{part.name}}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Ordered amount:
+        </td>
+        <td>
+          <input type="number" formControlName="amount">
+        </td>
+      </tr>
+    </table>
   </form>
 
   <div *ngIf="_missing.length !== 0" class="alert alert-danger">
-    <span>Not enough items in storage</span>
+    <span>Not enough items in storage. Missing:</span>
+    <div *ngFor="let item of _missing">{{item[0]}}: {{item[1]}}</div>
   </div>
 
 </div>

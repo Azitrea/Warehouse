@@ -1,10 +1,14 @@
+<div class="container border-left border-right">
+  <div>
+
+
 <div class="h1">Units</div>
 
 <div>
-  <button (click)="addUnitModal()">Add new unit</button>
+  <button class="btn btn-outline-success" (click)="addUnitModal()">Add new unit</button>
 </div>
 
-<table class="table table-striped w-50">
+<table class="table table-striped">
   <thead>
   <tr>
     <th scope="col">ID</th>
@@ -24,10 +28,10 @@
     <td>{{unit.onStorage}}</td>
     <td>{{unit.type}}</td>
     <td>
-      <button (click)="editUnitModal(unit)">Edit</button>
+      <button class="btn btn-outline-secondary" (click)="editUnitModal(unit)">Edit</button>
     </td>
     <td>
-      <button (click)="removeUnit(unit)">Delete</button>
+      <button class="btn btn-outline-danger" (click)="removeUnit(unit)">Delete</button>
     </td>
   </tr>
   </tbody>
@@ -37,10 +41,10 @@
 <div class="h1">Parts</div>
 
 <div>
-  <button (click)="addPartModal()">Add new part</button>
+  <button class="btn btn-outline-success" (click)="addPartModal()">Add new part</button>
 </div>
 
-<table class="table table-striped w-50">
+<table class="table table-striped">
   <thead>
   <tr>
     <th scope="col">ID</th>
@@ -58,12 +62,13 @@
     <td>{{part.date}}</td>
     <td>{{part.type}}</td>
     <td>
-      <button (click)="editPartsModal(part)">Edit</button>
+      <button class="btn btn-outline-secondary" (click)="editPartsModal(part)">Edit</button>
     </td>
     <td>
-      <button (click)="removePart(part)">Delete</button>
+      <button class="btn btn-outline-danger" (click)="removePart(part)">Delete</button>
     </td>
   </tr>
   </tbody>
 </table>
-
+</div>
+</div>

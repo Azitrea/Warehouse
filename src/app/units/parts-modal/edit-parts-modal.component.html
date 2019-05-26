@@ -6,32 +6,35 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="partFormGroup">
-    Name:<input id="name" type="text" formControlName="name"><br/>
+    <div class="text-center">
+      Part name: <input id="name" type="text" formControlName="name"><br/>
+    </div>
   </form>
 
   <div *ngIf="currentRecipe.length !== 0">Recipe</div>
 
   <div [formGroup]="partFormNumbers">
     <div formArrayName="parts">
-      <table>
-        <tr>
+      <table class="border">
+        <tr class="border">
           <td class="w-25">Unit ID</td>
           <td class="w-25">Name</td>
           <td class="w-25">Type</td>
           <td class="w-25">Required Amount</td>
+          <td> </td>
         </tr>
         <tr *ngFor="let p of partFormNumbers.controls.parts.controls; let i = index" [formGroupName]="i">
               <td>{{partFormArray.at(i).value.unitID}}</td>
               <td>{{partFormArray.at(i).value.name}}</td>
               <td>{{partFormArray.at(i).value.type}}</td>
               <td><input type="text" formControlName="unitAmount" /></td>
-              <td><button (click)="removeArrayElement(i)">Remove</button></td>
+              <td><button class="btn btn-outline-danger" (click)="removeArrayElement(i)">Remove</button></td>
         </tr>
       </table>
     </div>
   </div>
   <div>
-    <button (click)="addPart()">Add New Part</button>
+    <button class="btn btn-outline-success" (click)="addPart()">Add New Part</button>
   </div>
 </div>
 <div class="modal-footer">

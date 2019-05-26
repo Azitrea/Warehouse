@@ -4,20 +4,21 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body">
+<div class="modal-body border">
   <div *ngIf="!_partAndUnitList">No parts found</div>
-<table>
-  <tr>
+<table class="border w-100">
+  <tr class="border">
     <td>ID</td>
     <td>Name</td>
     <td>Type</td>
+    <td> </td>
   </tr>
   <tr *ngFor="let item of _partAndUnitList">
     <td>{{item.id}}</td>
     <td>{{item.name}}</td>
     <td>{{item.type}}</td>
     <td>
-      <button (click)="save(item)">Add</button>
+      <button class="btn btn-outline-secondary" (click)="save(item)">Add</button>
     </td>
 
   </tr>

@@ -6,8 +6,24 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="unitFormGroup">
-    Name:<input id="name" type="text" formControlName="name"><br/>
-    Stored Amount: <input id="amount" type="number" formControlName="onStorage">
+    <table>
+      <tr>
+        <td>
+          Name:
+        </td>
+        <td>
+          <input id="name" type="text" formControlName="name">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Stored Amount:
+        </td>
+        <td>
+          <input id="amount" type="number" formControlName="onStorage">
+        </td>
+      </tr>
+    </table>
   </form>
 </div>
 

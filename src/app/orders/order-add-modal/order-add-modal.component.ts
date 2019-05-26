@@ -139,7 +139,7 @@ export class OrderAddModalComponent implements OnInit {
       if (one['type'] === 'part') {
         const onePart = {'name': one['name'], 'id': one['unitID']};
         if (!this.containsObject(onePart, used)) {
-          used.push(onePart);
+          // used.push(onePart);
           const result = this.selectPartAndUnitList(one['unitID'], used, units, (one['unitAmount'] * amount));
           if (result !== 'Error') {
             used = result['used'];
@@ -176,19 +176,15 @@ export class OrderAddModalComponent implements OnInit {
 
 
   canInsertOrder(unitArray) {
-    const requiredUnitAmount = [];
+    const requiredUnitAmount = {};
     let canInsert = true;
-    console.log(unitArray['units']);
-    console.log(this.units);
     for (const calcUnit of unitArray['units']) {
       for (const storedUnit of this.units) {
-        console.log({'calcunitID': calcUnit['id'], 'asd': storedUnit['id']});
         if (calcUnit['id'] === storedUnit['id'].toString()) {
-          console.log(`${calcUnit['amount']} > ${storedUnit['onStorage']}`);
           if (calcUnit['amount'] > storedUnit['onStorage']) {
             canInsert = false;
             const calc = calcUnit['amount'] - storedUnit['onStorage'];
-            requiredUnitAmount.push({[calcUnit['name']]: calc});
+            requiredUnitAmount[calcUnit['name']] = calc;
           }
         }
       }
@@ -208,12 +204,10 @@ export class OrderAddModalComponent implements OnInit {
   save() {
     const calculatedUnits = this.calculateOrderUnits(this.orderFormGroup.value['orderedPart'], this.orderFormGroup.value['amount']);
     const canInsert = this.canInsertOrder(calculatedUnits);
-    console.log(canInsert);
     if (canInsert['canInsert']) {
       this.activeModal.close({action: 'save', data: this.orderFormGroup.value});
     } else {
-      this._missing = canInsert['missingUnits'];
-      console.log(canInsert['missingUnits']);
+      this._missing = Object.entries(canInsert['missingUnits']);
     }
   }
 }
